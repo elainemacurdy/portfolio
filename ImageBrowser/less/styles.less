@@ -1,0 +1,135 @@
+@import "./variables.less";
+
+body {
+    box-sizing: border-box;
+    margin: @bodyGutter;
+    overflow: hidden;
+    padding: 0 !important; /* Have to use important because the lightbox overrides it otherwise */
+}
+
+/* Custom scrollbars for webkit, but not FF because not supported yet, and not IE on general principle :) */
+::-webkit-scrollbar {
+    width: 5px;
+}
+::-webkit-scrollbar-button,
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-corner,
+::-webkit-resizer {
+    background-color: #AAA;
+}
+::-webkit-scrollbar-track-piece {
+    background-color: #555;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 5px;
+}
+
+button.atButton {
+    background: none;
+    border: 0;
+    border-spacing: 0;
+    box-shadow: none;
+    -moz-box-shadow: none;
+    -webkit-box-shadow: none;
+    cursor: pointer;
+    display: inline-block;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+}
+/* This is just a little visual indicator that the button is being clicked. */
+button.atButton:active {
+    top: 1px;
+    left: 1px;
+}
+button.atButton:focus {
+    outline: none;
+}
+button.atButton::-moz-focus-inner {
+    border: 0;
+    padding: 0;
+}
+
+.imageBrowser {
+    .buttons {
+        bottom: @bodyGutter;
+        height: @imageBrowserButtonSize;
+        left: 50%;
+        margin-left: ((((2 * @imageBrowserButtonSize) + @imageBrowserButtonGutter) / 2) * -1);
+        overflow: hidden;
+        position: absolute;
+        width: ((2 * @imageBrowserButtonSize) + @imageBrowserButtonGutter);
+
+        .atButton {
+            height: inherit;
+            width: @imageBrowserButtonSize;
+
+            &:first-child {
+                margin-right: 50px;
+            }
+        }
+    }
+
+    .favoritesPreview {
+        background-color: #333;
+        bottom: 0;
+        padding: @favoritePreviewThumbnailGutter;
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        h4 {
+            background-color: #E37A81;
+            height: @favoritePreviewHeaderSize;
+            margin: 0 0 @favoritePreviewThumbnailGutter 0;
+            text-align: center;
+
+            .icon {
+                position: relative;
+                height: ~"calc(100% - 2px)";
+                top: 1px;
+            }
+        }
+
+        .scrollContainer {
+            height: ~"calc(100% - @{favoritePreviewHeaderSize})";
+            overflow-y: scroll;
+
+            button:active {
+                top: inherit;
+                left: inherit;
+            }
+            .atButton {
+                display: block;
+                height: @favoritePreviewThumbnailSize;
+                margin: 0 @favoritePreviewThumbnailGutter @favoritePreviewThumbnailGutter 0;
+                width: @favoritePreviewThumbnailSize;
+
+                &:last-child {
+                    margin-bottom: 0px;
+                }
+            }
+        }
+    }
+
+    .mainImage {
+        display: block;
+        margin: auto;
+        max-height: ~"calc(100vh - (2 * @{bodyGutter}) - @{imageBrowserButtonSize})";
+        max-width: 100%;
+    }
+}
+
+.lightboxCustomControls {
+    left: ~"calc(50% - (@{lightboxButtonSize} / 2))";
+    position: relative;
+
+    .atButton {
+        background-color: #FFF;
+        display: inline-block;
+        height: @lightboxButtonSize;
+        width: @lightboxButtonSize;
+    }
+}
